@@ -29,13 +29,21 @@ az group list --output table
 
 ##Create a template
 
-#Define Variables
+#Define Variables for Blank Template
+$rgName = 'rg-armtemplate'
+$locName = 'eastus'
+$templateName='blankTemplate'
+$templateFile='acazuretemplate.json'
+
+
+#Define Variables for Resource Template
 $rgName = 'rg-armtemplate'
 $locName = 'eastus'
 $templateName='reosurceTempalteStorage'
 $templateFile='acazuretemplate.json'
 
 
+## Command to Create Deployment template inside resource group
 az deployment group create `
 --name $templateName `
 --resource-group $rgName `
