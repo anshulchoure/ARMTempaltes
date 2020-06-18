@@ -42,12 +42,26 @@ $locName = 'eastus'
 $templateName='reosurceTempalteStorage'
 $templateFile='acazuretemplate.json'
 
+#Define Variables for Parametarised Resource Template
+$rgName = 'rg-armtemplate'
+$locName = 'eastus'
+$templateName='parametersTempalteStorage'
+$storageName='acaz203storage02'
+$templateFile='acazuretemplate.json'
+
 
 ## Command to Create Deployment template inside resource group
 az deployment group create `
 --name $templateName `
 --resource-group $rgName `
 --template-file $templateFile
+
+## Command to Create Deployment template inside resource group with Parameters(SKUs and Name for Storage Account)
+az deployment group create `
+--name $templateName `
+--resource-group $rgName `
+--template-file $templateFile `
+--parameters storageName=$storageName
 
 #Delete group
 az group delete --name rg-armtemplate --no-wait
