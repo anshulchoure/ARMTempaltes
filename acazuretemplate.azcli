@@ -30,7 +30,9 @@ az group list --output table
 ##Create a template
 
 #Define Variables
-$templateName='BlankTemplate'
+$rgName = 'rg-armtemplate'
+$locName = 'eastus'
+$templateName='reosurceTempalteStorage'
 $templateFile='acazuretemplate.json'
 
 
