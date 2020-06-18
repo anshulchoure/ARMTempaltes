@@ -2,10 +2,14 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "storageName": {
+
+    "storagePrefix": {
+
       "type": "string",
       "minLength": 4,
-      "maxLength": 25
+      "maxLength": 24
+
+
     },
     "storageSKUs": {
       "type": "string",
@@ -17,12 +21,20 @@
         "Standard_ZRS"
       ]
     }
+
+
+  },
+
+  "variables": {
+
+    "uniquestorageName": "[concat(parameters('storagePrefix'),uniqueString(resourceGroup().id))]"
+
   },
   "resources": [
     {
       "type": "Microsoft.Storage/storageAccounts",
       "apiVersion": "2019-04-01",
-      "name": "[parameters('storageName')]",
+      "name": "[variables('uniquestorageName')]",
       "location": "East US",
       "sku": {
         "name": "[parameters('storageSKUs')]"
@@ -32,5 +44,14 @@
         "supportsHttpsTrafficOnly": true
       }
     }
-  ]
+  ],
+  "outputs": {
+
+    "storageEndpoint": {
+
+      "type": "object",
+      "value": "[reference(variables('uniquestorageName')).primaryEndpoints]"
+    }
+  }
+
 }

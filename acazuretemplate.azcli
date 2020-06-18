@@ -85,5 +85,31 @@ az deployment group create `
 --template-file $templateFile `
 --parameters storageName=$storageName storageSKUs=Standard_GRS
 
+
+
+#storage with output
+az deployment group create `
+--name $templateName `
+--resource-group $rgName `
+--template-file $templateFile `
+--parameters storagePrefix=$storageName
+
+
 #Delete group
 az group delete --name rg-armtemplate --no-wait
+
+
+## Creating Storage Account using Dyanmic storagename using prefix parameter.
+az deployment group create `
+--name $templateName `
+--resource-group $rgName `
+--template-file $templateFile `
+--parameters storagePrefix=$storageName
+
+
+## Creating Storage Account using Dyanmic storagename using prefix parameter and output to endpoint
+az deployment group create `
+--name $templateName `
+--resource-group $rgName `
+--template-file $templateFile `
+--parameters storagePrefix=$storageName
