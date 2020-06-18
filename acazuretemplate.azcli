@@ -1,0 +1,43 @@
+# TO Make a command run Press Ctrl + "'"
+
+#Login to Azure
+az login
+
+#List All Azure Accounts
+az account list -all
+
+# Set Subscription as Default
+az account set --subscription "Azure Pass - Sponsorship"
+
+#Creating Variables
+$rgName = 'rg-armtemplate'
+$locName = 'eastus'
+
+#Printing Name
+echo $rgName
+
+#Creating a Resource group
+az group create `
+--name $rgName `
+--location $locName
+
+#List All Groups
+az group list
+az group list --output table
+
+#Select current Resource group
+
+##Create a template
+
+#Define Variables
+$templateName='BlankTemplate'
+$templateFile='acazuretemplate.json'
+
+
+az deployment group create `
+--name $templateName `
+--resource-group $rgName `
+--template-file $templateFile
+
+#Delete group
+az group delete --name rg-armtemplate --no-wait
